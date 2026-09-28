@@ -39,6 +39,7 @@ $(NAME): $(LIB) $(OBJS)
 
 $(LIB):
 	$(MAKE) -C $(LIB_DIR)
+	cp $(LIB) $(NAME)
 
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
