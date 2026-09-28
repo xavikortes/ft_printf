@@ -67,4 +67,6 @@ In order to use the compiled library in your project:
 
 ## Resources
 
+- [man printf](https://www.man7.org/linux/man-pages/man3/printf.3.html)
+
 This project only use AI tools to check the exhaustiveness of the tests and received some guidance to write this `README.md`.
