@@ -20,7 +20,7 @@ $(NAME): $(LIBS)
 	./$(NAME)
 
 $(LIBS):
-	$(MAKE) -C $(LIB_DIR)
+	$(MAKE) bonus -C $(LIB_DIR)
 
 memcheck: $(NAME)
 	$(MEMCHECK) $(MEMFLAGS) ./$(NAME)

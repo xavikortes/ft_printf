@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_options.c                                    :+:      :+:    :+:   */
+/*   parse_options_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jcortes <jcortes@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/27 09:49:30 by jcortes           #+#    #+#             */
-/*   Updated: 2026/09/28 08:38:10 by jcortes          ###   ########.fr       */
+/*   Updated: 2026/09/28 08:37:50 by jcortes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,51 @@
 
 int	parse_minwidth(char **str)
 {
-	(void) str;
+	if (ft_isdigit(**str) && **str != '0')
+		return (parse_number(str));
 	return (-1);
 }
 
 int	parse_precision(char **str, t_options *opts)
 {
-	(void) str;
-	(void) opts;
-	return (-1);
+	if (**str != '.')
+		return (-1);
+	(*str)++;
+	opts->zero = 0;
+	return (parse_number(str));
+}
+
+int	is_flag(char c)
+{
+	return (c == '#' || c == '-' || c == '0' || c == ' ' || c == '+');
 }
 
 void	parse_flags(char **str, t_options *opts)
 {
-	(void) str;
-	(void) opts;
+	char	f;
+
+	f = **str;
+	while (is_flag(f))
+	{
+		if (f == '#')
+			opts->hash = 1;
+		if (f == ' ' && !opts->plus)
+			opts->blank = 1;
+		if (f == '0' && !opts->rightpad && opts->precision == -1)
+			opts->zero = 1;
+		if (f == '-')
+		{
+			opts->zero = 0;
+			opts->rightpad = 1;
+		}
+		if (f == '+')
+		{
+			opts->blank = 0;
+			opts->plus = 1;
+		}
+		(*str)++;
+		f = **str;
+	}
 }
 
 t_options	*parse_options(char **str)
