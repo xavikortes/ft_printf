@@ -6,7 +6,7 @@
 /*   By: jcortes <jcortes@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/24 17:45:27 by jcortes           #+#    #+#             */
-/*   Updated: 2026/09/25 19:31:18 by jcortes          ###   ########.fr       */
+/*   Updated: 2026/09/29 09:36:42 by jcortes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,20 @@
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char	*new;
+	size_t	str_len;
 
 	if (s == NULL)
 		return (NULL);
-	if (start > ft_strlen(s))
+	str_len = ft_strlen(s);
+	if (start > str_len)
 		return (ft_calloc(1, sizeof(char)));
-	new = ft_calloc(len + 1, sizeof(char));
+	str_len -= start;
+	if (len == SIZE_MAX)
+		len--;
+	if (len > str_len)
+		new = ft_calloc(str_len + 1, sizeof(char));
+	else
+		new = ft_calloc(len + 1, sizeof(char));
 	if (new == NULL)
 		return (NULL);
 	ft_strlcpy(new, s + start, len + 1);

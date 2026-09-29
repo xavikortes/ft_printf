@@ -6,7 +6,7 @@
 /*   By: jcortes <jcortes@student.42madrid.com      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/23 12:37:25 by jcortes           #+#    #+#             */
-/*   Updated: 2026/09/25 19:34:37 by jcortes          ###   ########.fr       */
+/*   Updated: 2026/09/29 09:30:00 by jcortes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*ft_strnstr(const char *str, const char *to_find, size_t size)
 		return ((char *) str);
 	if (size < len)
 		return (NULL);
-	while (str[i] != '\0' && i < size - len)
+	while (str[i] != '\0' && i <= size - len)
 	{
 		if (str[i] == *to_find)
 		{
