@@ -1,4 +1,4 @@
-#include "../project/ft_printf.h"
+#include "../project/inc/ft_printf.h"
 
 #include <stdio.h>
 #include <stdlib.h>
