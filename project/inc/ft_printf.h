@@ -6,14 +6,14 @@
 /*   By: jcortes <jcortes@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/26 09:30:39 by jcortes           #+#    #+#             */
-/*   Updated: 2026/09/27 12:47:53 by jcortes          ###   ########.fr       */
+/*   Updated: 2026/09/29 08:45:41 by jcortes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
-# include "libft/libft.h"
+# include "../libft/libft.h"
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdarg.h>

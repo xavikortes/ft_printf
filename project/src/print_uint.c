@@ -6,7 +6,7 @@
 /*   By: jcortes <jcortes@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/27 12:15:21 by jcortes           #+#    #+#             */
-/*   Updated: 2026/09/27 12:17:03 by jcortes          ###   ########.fr       */
+/*   Updated: 2026/09/29 08:37:57 by jcortes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,13 @@ int	uint_printer_len(uintptr_t n, t_options *opts)
 	return (len);
 }
 
+size_t	print_zero_uint(t_options *opts)
+{
+	if (opts->minwidth > 0)
+		return (print_padding(0, opts->minwidth));
+	return (0);
+}
+
 size_t	print_uint(uintptr_t n, t_options *opts)
 {
 	char	*s;
@@ -34,7 +41,7 @@ size_t	print_uint(uintptr_t n, t_options *opts)
 	int		str_len;
 
 	if (n == 0 && opts->precision == 0)
-		return (0);
+		return (print_zero_uint(opts));
 	len = uint_printer_len(n, opts);
 	if (!opts->rightpad && opts->minwidth > len)
 		len = print_padding(opts->zero, opts->minwidth - len);

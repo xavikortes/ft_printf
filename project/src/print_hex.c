@@ -6,7 +6,7 @@
 /*   By: jcortes <jcortes@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/27 12:17:31 by jcortes           #+#    #+#             */
-/*   Updated: 2026/09/27 12:36:19 by jcortes          ###   ########.fr       */
+/*   Updated: 2026/09/29 08:36:39 by jcortes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,13 @@ int	calculate_print_hex_len(uintptr_t n, char *s, t_options *opts)
 	return (len);
 }
 
+size_t	print_zero_hex(t_options *opts)
+{
+	if (opts->minwidth != -1)
+		return (print_padding(0, opts->minwidth));
+	return (0);
+}
+
 size_t	print_hex(uintptr_t n, int uppercased, t_options *opts)
 {
 	char	*s;
@@ -41,7 +48,7 @@ size_t	print_hex(uintptr_t n, int uppercased, t_options *opts)
 	int		str_len;
 
 	if (n == 0 && opts->precision == 0)
-		return (0);
+		return (print_zero_hex(opts));
 	len = 0;
 	if (uppercased)
 		s = ft_utoa_base(n, "0123456789ABCDEF");

@@ -6,7 +6,7 @@
 /*   By: jcortes <jcortes@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/27 12:22:31 by jcortes           #+#    #+#             */
-/*   Updated: 2026/09/27 12:38:37 by jcortes          ###   ########.fr       */
+/*   Updated: 2026/09/29 08:10:41 by jcortes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 size_t	print_conversion(char conv, va_list args, t_options *opts)
 {
 	if (conv == '%')
-		return (print_char('%', opts));
+		return (write_char('%'));
 	if (conv == 'c')
 		return (print_char(va_arg(args, int), opts));
 	if (conv == 's')
@@ -44,7 +44,7 @@ size_t	print_argument(va_list args, char **fmt)
 	opts = parse_options(fmt);
 	conv = **fmt;
 	len = print_conversion(conv, args, opts);
-	if (opts->rightpad && opts->minwidth > len)
+	if (opts->rightpad && opts->minwidth > len && conv != '%')
 		len += print_padding(0, opts->minwidth - len);
 	free(opts);
 	return (len);

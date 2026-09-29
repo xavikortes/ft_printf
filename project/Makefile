@@ -5,6 +5,10 @@ CFLAGS = -Wall -Werror -Wextra
 RM = rm -rf
 AR = ar rcs
 
+SRC_DIR = ./src
+INC_DIR = ./inc
+OBJ_DIR = ./obj
+
 SRC = \
 	ft_printf \
 	parse_options \
@@ -17,25 +21,25 @@ SRC = \
 	print_ptr \
 	print_utils \
 	num_utils
-SRCS = $(addsuffix .c, $(SRC))
-
-OBJ_DIR = ./obj
-OBJS = $(SRCS:%.c=$(OBJ_DIR)/%.o)
+SRC_ = $(addsuffix .c, $(SRC))
+SRCS = $(addprefix $(SRC_DIR)/, $(SRC_))
+OBJS = $(SRC_:%.c=$(OBJ_DIR)/%.o)
 
 BONUS_SRC = $(SRC) parse_options_bonus
-BONUS_SRCS = $(addsuffix .c, $(BONUS_SRC))
-BONUS_OBJS = $(BONUS_SRCS:%.c=$(OBJ_DIR)/%.o)
+BONUS_SRC_ = $(addsuffix .c, $(BONUS_SRC))
+BONUS_SRCS = $(addprefix $(SRC_DIR)/, $(BONUS_SRC_))
+BONUS_OBJS = $(BONUS_SRC_:%.c=$(OBJ_DIR)/%.o)
 
 LIB_DIR = ./libft
 LIB = $(LIB_DIR)/libft.a
 
 all: $(NAME)
 
-bonus: fclean $(LIB) $(BONUS_OBJS)
-	$(AR) $(NAME) $(BONUS_OBJS)
-
 $(NAME): $(LIB) $(OBJS)
 	$(AR) $(NAME) $(OBJS)
+
+bonus: fclean $(LIB) $(BONUS_OBJS)
+	$(AR) $(NAME) $(BONUS_OBJS)
 
 $(LIB):
 	$(MAKE) -C $(LIB_DIR)
@@ -44,8 +48,8 @@ $(LIB):
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
 
-$(OBJ_DIR)/%.o: %.c | $(OBJ_DIR)
-	$(CC) $(CFLAGS) -c $< -o $@
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
+	$(CC) $(CFLAGS) -I $(INC_DIR) -c $< -o $@
 
 clean:
 	$(MAKE) clean -C $(LIB_DIR)

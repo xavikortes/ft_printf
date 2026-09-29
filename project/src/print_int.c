@@ -6,7 +6,7 @@
 /*   By: jcortes <jcortes@student.42madrid.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/27 11:54:54 by jcortes           #+#    #+#             */
-/*   Updated: 2026/09/27 12:13:27 by jcortes          ###   ########.fr       */
+/*   Updated: 2026/09/29 08:36:21 by jcortes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,13 @@ size_t	print_int_prefixes(long n, t_options *opts)
 	return (len);
 }
 
+size_t	print_zero_int(t_options *opts)
+{
+	if (opts->minwidth > 0)
+		return (print_padding(0, opts->minwidth));
+	return (0);
+}
+
 size_t	print_int(long n, t_options *opts)
 {
 	char	*s;
@@ -52,7 +59,7 @@ size_t	print_int(long n, t_options *opts)
 	int		str_len;
 
 	if (n == 0 && opts->precision == 0)
-		return (0);
+		return (print_zero_int(opts));
 	len = 0;
 	str_len = int_printer_len(n, opts);
 	if (!opts->zero && !opts->rightpad && opts->minwidth > str_len)
